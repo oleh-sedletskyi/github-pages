@@ -17,7 +17,7 @@ jobs:
       - run: bb quickblog render
       - uses: actions/upload-pages-artifact@v2
         with:
-          path: public/
+          path: docs/
   deploy:
     needs: build
     permissions:
