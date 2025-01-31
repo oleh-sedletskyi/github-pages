@@ -15,9 +15,10 @@ jobs:
         with:
           bb: latest
       - run: bb quickblog render
-      - uses: actions/upload-pages-artifact@v2
+      - uses: actions/upload-pages-artifact@v4
         with:
           path: public/
+          overwrite: true
   deploy:
     needs: build
     permissions:
@@ -28,5 +29,6 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/deploy-pages@v2
+      - uses: actions/deploy-pages@v4
         id: deployment
+        overwrite: true
