@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <title>Мікроб і я: Практичні знання з наукових джерел</title>
+    <meta name="description" content="A pure HTML example, without dependencies.">
+
+    <!-- Pico.css -->
+    <!-- href="https://cdn.jsdelivr.net/npm/@picocss/pico@2.1.1/css/pico.min.css" -->
+    <link rel="stylesheet" href="../css/pico.min.css">
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header class="container">
+       <!-- <hgroup>  -->
+        <nav>
+          <ul>
+            <li><h1><a href="../index.html" class="contrast secondary">Мікроб і я</a></h1>
+              <p>Мікроб і я: Практичні знання з наукових джерел</p>  </li>
+          </ul>
+          <ul>
+            <li><a href="../index.html" class="contrast secondary">Публікації</a></li>
+            <li><a href="../pro-mikrob-i-ya.html" class="secondary">Про нас</a></li>
+            <li><a href="../kontakty.html" class="secondary">Контакти</a></li>
+            <li>
+              <details class="dropdown">
+                <summary role="button" class="outline secondary">☀</summary>
+                <ul>
+                  <li><a href="#" data-theme-switcher="auto">Auto</a></li>
+                  <li><a href="#" data-theme-switcher="light">Light</a></li>
+                  <li><a href="#" data-theme-switcher="dark">Dark</a></li>
+                </ul>
+              </details>
+            </li>
+          </ul>
+        </nav>
+      <!-- </hgroup> -->
+    
+    </header>
+    
+    <main class="container">
+      <section>
+        <h1>"Лечу по фотографии" - сучасні технології допомагають перевірити родимку на її безпечність</h1><p>Справедливо відмітити, що ідея не нова, вона раніше вже була втілена <a href='https://cs.stanford.edu/people/esteva/nature/'>стентфортськими</a><a href='https://cs.stanford.edu/people/esteva/nature/'>дослідниками</a>, а також стала темою <a href='http://www.ihsit-cd.eu/index.php?id=test'>грантового</a><a href='http://www.ihsit-cd.eu/index.php?id=test'>проекту</a> білоруських колег. Окрім того, на сьогодні вже існує до чотирьох десятків мобільних додатків, які можуть допомогти користувачу спробувати дослідити своб родимку. Українська команда, проаналізувавши досвід попередників, врахувавши всі недоліки та переваги, створила ресурс Nevus, який стане у пригоді не лише для пересічного користувача, а й для медичних співробітників, що працюють в цій сфері.</p><p>Основний фокус проекту зосереджений на можливості розрізняти невус (власне родимку), меланому та себорейний кератоз. Для цього просто потрібно сфотографувати та завантажити свою родимку, після чого нейронна мережа із 25 мільйонами параметрів буде порівнювати її із 10 тисячами інших зображень. Як результат буде отримано три числа, які відображають ймовірність того, що на завантаженому фото саме родимка, меланома чи кератоз. На основі величини цього числа робиться припущення про діагноз.</p><p>Чи помиляється система? Відповідь - так, як, власне, і лікарі. Ймовірність похибки завжди є, але цікаво відзначити, що специфічність та чутливість створеного методу цілком співрозмірна із тими, яких було досягнуто колегами стенфортського проекту, де кількість зображень в базі була в десять разів більша.</p><p>На даний час триває розробка мобільного додатку з одноіменною назвою.</p><p>А ми тим часом вже зараз можемо протестувати інші вже існуючі додатки для наших родимок, а вже в зовсім близькому майбутньому користуватися нашим українським сервісом.</p><p><img src="../images/diagnostika-rodimok.jpg" alt="" /></p>
+      </section>
+    </main>
+
+    <!-- Minimal theme switcher -->
+    <script src="../js/minimal-theme-switcher.js"></script>
+    </body>
+  </html>
