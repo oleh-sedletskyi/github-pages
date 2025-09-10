@@ -1,9 +1,48 @@
-{:deps {io.github.borkdude/quickblog
-        #_"You use the newest SHA here:"
-        {:git/sha "1b3941a3d07e1419c3584361e1cea4930a52fdf3"}}
- :tasks
- {:requires ([quickblog.cli :as cli])
-  :init (def opts {:blog-title "REPL adventures"
-                   :blog-description "A blog about blogging quickly"})
-  quickblog {:doc "Start blogging quickly! Run `bb quickblog help` for details."
-             :task (cli/dispatch opts)}}}
+#_{:deps {io.github.borkdude/quickblog
+          #_"You use the newest SHA here:"
+          {:git/sha "1b3941a3d07e1419c3584361e1cea4930a52fdf3"}}
+   :tasks
+   {:requires ([quickblog.cli :as cli])
+    :init (def opts {:blog-title "REPL adventures"
+                     :blog-description "A blog about blogging quickly"})
+    quickblog {:doc "Start blogging quickly! Run `bb quickblog help` for details."
+               :task (cli/dispatch opts)}}}
+
+{:paths ["src" "resources" "public"]
+ :deps {markdown-clj/markdown-clj {:mvn/version "1.12.3"}
+        io.github.escherize/huff {:mvn/version "0.2.13"}}
+ :pods {org.babashka/fswatcher {:version "0.0.5"}}
+ :tasks {build {:requires [[babashka.fs :as fs]]
+                :task
+                (do
+                  (println "Building...")
+                  (fs/create-dirs "static")
+                  (fs/copy-tree "./public" "static" {:replace-existing true})
+                  #_(doseq [[path f] pages/pages
+                            :let [target-path (str "static/" path "/index.html")]]
+                      (fs/create-dirs (fs/parent target-path))
+                      (spit target-path (base/build f)))
+                  (spit "static/CNAME" "blog.907050.xyz"))}
+         serve {:extra-deps {org.babashka/http-server {:mvn/version "0.1.13"}}
+                :requires [[babashka.http-server :as http]]
+                :task (do
+                        (run 'build)
+                        (http/serve {:port 7777 :dir "static"})
+                        (deref (promise)))}
+         watch {:requires [[pod.babashka.fswatcher :as fw]
+                           [babashka.fs :as fs]]
+                :task (do
+                        (println "Watching...")
+                        (doseq [dir ["src" "resources"]]
+                          (fw/watch dir
+                                    (fn [event]
+                                      (println "Reloading...")
+                                      ;; reload all files
+                                      (->> (fs/glob "src" "**.clj")
+                                           (map (fn [f]
+                                                  (load-file (.toString f))))
+                                           doall)
+                                      (run 'build))
+                                    {:recursive true
+                                     :delay-ms 250}))
+                        (run 'serve))}}}
