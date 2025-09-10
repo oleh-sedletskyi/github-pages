@@ -37,7 +37,7 @@
                           (fw/watch dir
                                     (fn [event]
                                       (println "Reloading...")
-                                      ;; reload all files
+                                      ;; reload all files 
                                       (->> (fs/glob "src" "**.clj")
                                            (map (fn [f]
                                                   (load-file (.toString f))))
