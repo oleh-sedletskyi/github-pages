@@ -8,7 +8,7 @@
     quickblog {:doc "Start blogging quickly! Run `bb quickblog help` for details."
                :task (cli/dispatch opts)}}}
 
-{:paths ["src" "resources" "public"]
+{:paths ["src" "resources"]
  :deps {markdown-clj/markdown-clj {:mvn/version "1.12.3"}
         io.github.escherize/huff {:mvn/version "0.2.13"}}
  :pods {org.babashka/fswatcher {:version "0.0.5"}}
@@ -17,7 +17,7 @@
                 (do
                   (println "Building...")
                   (fs/create-dirs "static")
-                  (fs/copy-tree "./public" "static" {:replace-existing true})
+                  (fs/copy-tree "./resources/public" "static" {:replace-existing true})
                   #_(doseq [[path f] pages/pages
                             :let [target-path (str "static/" path "/index.html")]]
                       (fs/create-dirs (fs/parent target-path))
